@@ -52,7 +52,7 @@ Note the tunnel name and ID; you’ll need them for the config.
 
 ```yaml
 tunnel: my-tunnel
-credentials-file: /home/pi/.cloudflared/tunnel_id_here.json
+credentials-file: /home/user_name/.cloudflared/tunnel_id_here.json
 
 ingress:
   - hostname: your_url.com
