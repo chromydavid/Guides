@@ -1,14 +1,25 @@
 ## Libraries
 `include <stdio.h>`       standard input output
+
 `include <math.h>`      math functions
+
 `include <stdbool.h>`     standard boolean 
+
 `include <string.h>`      for string manipulation ( strlen() )
+
 `include <windows.h>`     sleep function:   Sleep(1000);     in miliseconds
+
 `include <unistd.h>`      sleep for linux/mac: sleep(1);     in seconds
+
 `include <time.h>`        for random int
+
 `include <stdlib.h>`      for random int and malloc()
 
+
+
 `//comment`     using // we can comment our code (like # in python)
+
+
 
 ## Data types
 int a = 5;      max size of 4 bytes  
