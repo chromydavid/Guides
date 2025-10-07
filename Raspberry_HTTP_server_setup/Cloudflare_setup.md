@@ -50,7 +50,7 @@ Note the tunnel name and ID; you’ll need them for the config.
 
 2. Paste
 
-```bash
+```yaml
 tunnel: my-tunnel
 credentials-file: /home/pi/.cloudflared/tunnel_id_here.json
 
@@ -58,9 +58,45 @@ ingress:
   - hostname: your_url.com
     service: http://localhost:8080
   - service: http_status:404
-``` 
+```
 
 3. Replace tunnel_id_here with the tunnel id you got when creating the tunnel
+
+4. For later when using multiple web-apps /ports:
+   
+```yaml
+tunnel: my-tunnel
+credentials-file: /home/pi/.cloudflared/tunnel_id_here.json
+
+ingress:
+  # site
+  - hostname: your_url.com
+    service: http://localhost:8080
+
+  # site 2 (subdomain -> another local web app)
+  - hostname: api.your_url.com
+    service: http://localhost:3000
+
+  # site 3 (different domain on same tunnel)
+  - hostname: another-domain.com
+    service: http://localhost:5000
+
+  # site 4 (path-based routing on same hostname)
+  - hostname: your_url.com
+    path: /admin/*
+    service: http://localhost:9000
+
+  # non-HTTP example (SSH/TCP)
+  - hostname: ssh.your_url.com
+    service: tcp://localhost:22
+
+  # wildcard example (all *.your_url.com -> local reverse proxy)
+  - hostname: '*.your_url.com'
+    service: http://localhost:8080
+
+  # fallback rule: MUST be last (404)
+  - service: http_status:404
+```
 
 ## Step 6: host your html app
 
