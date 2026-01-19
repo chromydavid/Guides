@@ -7,9 +7,8 @@
 
 - Exit venv: `deactivate`
 
-- Install packages (modules/libraries): `pip install Flask Flask-Scss Flask-SQLAlchemy`
+- Install packages (modules/libraries): `pip install Flask Flask-SQLAlchemy`
     - Flask: (main Framework)
-    - Flask-Scss: (Sassy CSS)
     - SQLAlchemy: Simplifies comunication to DBs (App to DB middleman)
 
 - Create requirements.txt (inside venv): `pip freeze > requirements.txt`
@@ -37,16 +36,51 @@
     - Possible content of `app.py`:
         ``` python
         from flask import Flask
-        from flask_scss import Scss
-        from flask_sqlalchemy import SQLAlchemy #Recommend using Sass VSCode extension
+        from flask_sqlalchemy import SQLAlchemy 
         
         app = Flask(__name__) #Creates flask app object
 
         @app.route("/") #Runs function if said route is visited
         def index():
-            return "Testing 123"
+            return render_template("index.html") #Renders index.html
 
         if __name__ == "__main__":  #Runs when this file is started directly
             app.run(debug=True) #debug=True automatically reloads web when code is changed (remove for prod !!unsafe)
         ``` 
-        
+
+## Index HTML page
+- Contents of `index.html` :
+    ```html
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="styles.css">
+        <title>Document</title>
+    </head>
+    <body>
+        <div class="content">
+            <h1>Task manager</h1>
+            <table>
+                <tr>
+                    <th>Task</th>
+                    <th>Added</th>
+                    <th>Actions</th>
+                </tr>
+                <tr>
+                    <td>Content</td>
+                    <td>Date</td>
+                    <td>More</td>
+                </tr>
+            </table>
+            <form action="">
+                <input type="text" name="content" id="content">
+                <input type="submit" value="Add Task" id="btn_add">
+            </form>
+        </div>  
+    </body>
+    </html>
+    ```
+
+## Template inheritance
