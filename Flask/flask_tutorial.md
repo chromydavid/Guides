@@ -2,9 +2,7 @@
 
 ## Creating virtual eviroment (venv)
  - Creates venv directory:
-    ``` bash
-        python -m venv env
-    ```
+    `python -m venv env`
 
 - Move to venv:
     ``` bash
