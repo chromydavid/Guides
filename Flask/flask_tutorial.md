@@ -16,7 +16,7 @@
     - Writes all pip libs inside venv into the requirements.txt file
 
 ## Simple project structure
-    ``` bash
+    ``` yaml
     flask_app/
     │
     ├── venv/                 # Virtual environment 
@@ -27,8 +27,8 @@
     ├── templates/            # HTML templates 
     │       └── index.html
     │
-    ├── app.py                    # Entry point to run the app
-    └── requirements.txt          # Python dependencies
+    ├── app.py                # Entry point to run the app
+    └── requirements.txt      # Python dependencies
     ```
 
 ## Initial setup
