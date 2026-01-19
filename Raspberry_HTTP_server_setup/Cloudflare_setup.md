@@ -66,7 +66,7 @@ ingress:
    
 ```yaml
 tunnel: my-tunnel
-credentials-file: /home/pi/.cloudflared/tunnel_id_here.json
+credentials-file: /home/user_name/.cloudflared/tunnel_id_here.json
 
 ingress:
   # site
@@ -98,7 +98,7 @@ ingress:
   - service: http_status:404
 ```
 
-## Step 6: host your html app
+## Step 6: host your html app (When server restarts you need to repeat this step and step 8.)
 
 1. Go to the directory where your index.html is stored
 
@@ -113,6 +113,7 @@ ingress:
 Output will go to a file called `nohup.out` in the current directory.
 
 runs the app on `http://localhost:8080` using python lib "http.server"
+if index.html exists it is forwarded automatically (thats why i reccomend to have index.html as main app start file)
 
 Cloudflare tunnel will forward all requests from `your_url.com` to this port.
 
