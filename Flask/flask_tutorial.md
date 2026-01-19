@@ -48,39 +48,50 @@
             app.run(debug=True) #debug=True automatically reloads web when code is changed (remove for prod !!unsafe)
         ``` 
 
-## Index HTML page
-- Contents of `index.html` :
+## Template inheritance
+- We create a base.html template:
     ```html
     <!DOCTYPE html>
     <html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="styles.css">
-        <title>Document</title>
+        <link rel="stylesheet" href="{{url_for("static", filename="styles.css")}}">
+        {% block head %}{% endblock %}
     </head>
     <body>
-        <div class="content">
-            <h1>Task manager</h1>
-            <table>
-                <tr>
-                    <th>Task</th>
-                    <th>Added</th>
-                    <th>Actions</th>
-                </tr>
-                <tr>
-                    <td>Content</td>
-                    <td>Date</td>
-                    <td>More</td>
-                </tr>
-            </table>
-            <form action="">
-                <input type="text" name="content" id="content">
-                <input type="submit" value="Add Task" id="btn_add">
-            </form>
-        </div>  
+        {% block body %}{% endblock %}
     </body>
     </html>
     ```
+    - The {block} are used as a marker of space into which we can later inser code
 
-## Template inheritance
+- Now we can create the index.html and we can just inherit the boilerplate from base.html:
+    ```html
+    {% extends "base.html" %}
+    {% block head %}
+    <title>Task Manager</title>
+    {% endblock %}
+
+    {% block body %}
+    <div class="content">
+        <h1>Task manager</h1>
+        <table>
+            <tr>
+                <th>Task</th>
+                <th>Added</th>
+                <th>Actions</th>
+            </tr>
+            <tr>
+                <td>Content</td>
+                <td>Date</td>
+                <td>More</td>
+            </tr>
+        </table>
+        <form action="">
+            <input type="text" name="content" id="content">
+            <input type="sub" >
+        </form>
+    </div>
+    {% endblock %}
+    ```
