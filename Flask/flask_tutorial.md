@@ -16,8 +16,10 @@
     - Flask: (main Framework)
     - SQLAlchemy: Simplifies comunication to DBs (App to DB middleman)
 
-- Create requirements.txt (inside venv): `pip freeze > requirements.txt`
-    - Writes all pip libs inside venv into the requirements.txt file
+- Create requirements.txt: `pip freeze > requirements.txt`
+    - Writes all pip libs inside requirements.txt file for future lib install
+      
+- If requirements.txt exists, pull libs from it: `pip install -r requirements.txt`
 
 ## Simple project structure
     ``` yaml
