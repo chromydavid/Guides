@@ -1,7 +1,7 @@
 # FLASK Basics
 
 ## Creating virtual eviroment (venv)
-- Create venv directory: `python -m venv env`
+- Create venv directory: `python -m venv venv`
 
 - Move to venv: `source env/bin/activate`
 
