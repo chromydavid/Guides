@@ -3,9 +3,12 @@
 ## Creating virtual eviroment (venv)
 - Create venv directory: `python -m venv venv`
 
-- Move to venv:
+- Move to venv (Shell will show (venv) at the start if succesful):
     - Linux: `source env/bin/activate`
-    - Windows: `venv\Scripts\Activate.ps1`
+    - Windows (CMD):
+    - Windows (Powershell): `venv\Scripts\activate.bat`
+        - Run: `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser`    
+        - Then: `venv\Scripts\Activate.ps1`
 
 - Exit venv: `deactivate`
 
