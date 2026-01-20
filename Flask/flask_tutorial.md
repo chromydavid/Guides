@@ -5,8 +5,8 @@
 
 - Move to venv (Shell will show (venv) at the start if succesful):
     - Linux: `source env/bin/activate`
-    - Windows (CMD):
-    - Windows (Powershell): `venv\Scripts\activate.bat`
+    - Windows (CMD): `venv\Scripts\activate.bat`
+    - Windows (Powershell): 
         - Run: `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser`    
         - Then: `venv\Scripts\Activate.ps1`
 
