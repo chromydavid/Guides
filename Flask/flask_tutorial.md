@@ -3,8 +3,9 @@
 ## Creating virtual eviroment (venv)
 - Create venv directory: `python -m venv venv`
 
-- Move to venv (Linux): `source env/bin/activate`
-- Move to venv (Windows): `venv\Scripts\Activate.ps1`
+- Move to venv:
+    - Linux: `source env/bin/activate`
+    - Windows: `venv\Scripts\Activate.ps1`
 
 - Exit venv: `deactivate`
 
