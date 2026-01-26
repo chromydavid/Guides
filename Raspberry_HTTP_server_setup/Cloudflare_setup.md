@@ -98,7 +98,7 @@ ingress:
   - service: http_status:404
 ```
 
-## Step 6: host your html app (When server restarts you need to repeat this step and step 8.)
+## Step 6: host your html app (When server restarts you need to repeat everything from this step)
 
 1. Go to the directory where your index.html is stored
 
