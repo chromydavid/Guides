@@ -138,3 +138,21 @@ Now your domain `your_url.com` is linked to your Raspberry Pi tunnel.
 `https://your_url.com`
 
 Thats it !!
+
+## Useful commands
+
+1. Show all running services:
+
+`sudo ss -tulpn` 
+
+2. Show all running services that are only LISTENING (HTTP websites):
+   
+`sudo ss -tulpn | grep LISTEN`
+
+3. Close specific service (copy PID of service shown by command above):
+
+`sudo kill <PID>` 
+
+4. Hard shutdown "kill" specific service:
+
+`sudo kill -9 <PID>`
