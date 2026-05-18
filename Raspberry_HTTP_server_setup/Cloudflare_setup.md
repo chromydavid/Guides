@@ -61,6 +61,7 @@ ingress:
 ```
 
 3. Replace tunnel_id_here with the tunnel id you got when creating the tunnel
+IF YOU HAVE REMOTELY MANAGED TUNNEL THEN THIS CONFIG.YAML WILL NOT WORK YOU HAVE TO ADD URL IN CLOUDFLARED WEB INTERFACE UNDER Networking>tunnels>my_tunnel>add_route
 
 4. For later when using multiple web-apps /ports:
    
