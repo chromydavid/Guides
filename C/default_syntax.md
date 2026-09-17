@@ -1,326 +1,483 @@
-## Libraries
-`include <stdio.h>`       standard input output
+# Libraries
+`#include <stdio.h>`       Standard input/output functions (printf, scanf, fopen)
 
-`include <math.h>`      math functions
+`#include <math.h>`        Math functions (pow, sqrt, round) — compile with -lm on Linux
 
-`include <stdbool.h>`     standard boolean 
+`#include <stdbool.h>`     Boolean data type (`bool`, `true`, `false`)
 
-`include <string.h>`      for string manipulation ( strlen() )
+`#include <string.h>`      String manipulation (strlen, strcpy, strcmp)
 
-`include <windows.h>`     sleep function:   Sleep(1000);     in miliseconds
+`#include <windows.h>`     Windows sleep function: Sleep(1000); (in milliseconds)
 
-`include <unistd.h>`      sleep for linux/mac: sleep(1);     in seconds
+`#include <unistd.h>`      POSIX/Linux sleep function: sleep(1); (in seconds)
 
-`include <time.h>`        for random int
+`#include <time.h>`        Time functions used to seed PRNG (time)
 
-`include <stdlib.h>`      for random int and malloc()
+`#include <stdlib.h>`      General utilities: memory allocation (malloc, calloc), rand(), exit()
 
+`// comment`               Single-line comment (like # in Python)
 
+`/* comment */`            Multi-line block comment
 
-`//comment`     using // we can comment our code (like # in python)
+# Basic Structure
+```c
+#include <stdio.h>  // standard in/out lib
 
-
-
-## Data types
-int a = 5;      max size of 4 bytes  
-float b = 5.5;  4 bytes, 7 decimal points (single precision)
-double c = 3.14159265358979;    8bytes, 15 decimal points (double precision)
-char d = ‘A‘;   1 byte singe charakter
-char name[] = ¨Ahoj jak je¨     array of characters (string) we use double quotes
-bool isTrue = true;     1 byte needs its own library and can be true or false
-
-Format specifier
-Special tokens that begin with % symbol followed by a charakter that specifies the data type and optional modifiers(width, precision, flags). They control how data is displayed and interpreted.
-printf(“Je mi %d“, 18); 	//%d expects int after the string
-printf(“Cena %f“, 19.548);	//%f expects float
-printf(¨Cena %lf¨, 19.54545454545) 	//%lf expects long float (double)
-printf(“Známka %c“, ¨A¨);	//%c expects charakter (char)
-printf(“Text :  %s“, ¨Ahoj¨);	//%s expects string
-printf(“Text :  %p“, &age);	//%p expects pointer address
-modifiers
-printf(¨%4d¨, 10);	//prints 10 but right justified (two spaces and 10)
-printf(¨%-4d¨, 10);	//prints 10 but left justified (10 and two spaces)
-printf(¨%04d¨, 10);	//prints 10 but right justified (two 0 and 10)
-printf(¨%+d¨, 10);	//prints 10 but with + or – sign (depends on value of int 10 or -10)
-printf(¨%.2f¨, 10.5481);	//prints 10.54 so the 0.2 means 2 decimal places (automatically rounds numbers so 19.99 with %.1 would be 20.0)
-
-printf(¨%+7.2f¨, 10.5481);	//prints +10.55 right justified
-
-
-
-
-Operators
-Operator			Name	Description	Example
-+			Addition	Adds two operands	a + b
--			Subtraction	Subtracts right from left operand	a - b
-*			Multiplication	Multiplies two operands	a * b
-/			Division	Divides left by right operand	a / b
-%			Modulus	Remainder of division	a % b
-++			Increment	Increases value by 1	++a, a++
---			Decrement	Decreases value by 1	--a, a--
-&&			AND	Bool	a && b
-||			OR	Bool	a || b
-!			NOT	Bool	!a
-!!!! Be carefull with /
-float a = b / c		//in this context c cant be int type must be float (integer division)
-
-Variables
-int a = 0;	//sets value a to 0
-int b;		//declares b as int so we can later use it and assign its value BUT this can lead to undefined behaviour because b can exits in memory with some value so its good to assing it beforehand like a or define its value before we use it
-
-float gpa = 0.0f;	//tells the compiler that its float (0.0 would be double)
-char grade = ‘\0‘;	//null terminator (clears variable only for char)
-char name[30] = ¨¨;	//empty string with max size of 30 bytes (30 chars)
-const int A = 12;	//creates a constant int variable A
-
-Type casting
-User input
-int age = 0;
-printf(¨Enter age : ¨);
-scanf(¨%d¨, &age);	//&age the & means address of so it returns memmory address
-scanf(¨ %c¨, &grade);	//space before %c (without it the grade would be set to \n because of the first scanf (input buffer contains  \n before we input our character))
-
-char name[30] = ‘ ‘;
-getchar();				//clears the \n symbol becaouse fgets cant do that
-fgets(name, sizeof(name) , stdin);	// scanf stops at white spaces so we use fgets() with values of variable to input into, size of the vairable (we use function to get it), stdin = standard input
-Strings
-char name[] = “Dave“;
-name[strlen(name)-1] = “\0“;	// strlen() vrátí délku stringu a poté nastavíme poslední index (e) na null terminator
-Math
-sqrt(9);	//square root of 9
-pow(2,3);	//2 raised to the power of 3 (8)
-round(3.14);	//3
-ceil(3.14);	//4
-floor(3.14);	//3
-abs(-4);	//4
-log(3);		//1.098612     natural logarithm (e to the power of x = 3)
-sin(45);	//0.850904	sin with input in radians
-cos(45);	//0.525322	cos with input in radians
-tan(45);	//1.617591	radians input
-If statements
-int a = 18; 
-if (a >= 65){
-        printf(“Senior“);
-}else if (a >= 18){
-        printf(“Adult“)
-}else{
-        printf(“Kid“);
+// The main function (program starts here)
+int main() {
+    printf("Hello, World!\n");
+    return 0; // Returning 0 to OS (all went good)
 }
+```
 
+# Data types
+```c
+int a = 5; // 4 bytes typical (-2,147,483,648 to 2,147,483,647)
 
+float b = 5.5f; // 4 bytes, ~6-7 decimal places (single precision; add 'f' suffix)
 
+double c = 3.14159265358979; // 8 bytes, ~15-17 decimal places (double precision)
 
+char d = 'A'; // 1 byte, stores a single character enclosed in single quotes
 
+char name[] = "Ahoj jak je"; // Array of characters terminated by '\0'; uses double quotes
 
-Switch Case
-int a = 1;
-switch(a){
-        case 1:
-                print(“Monday“);
-                break;
-        case 2:
-                print(“Tuesday“);
-                break;
-        default:
-                print(“Other day“);
-}
-Functions
-Declaring function return
-void a(){}	//expected to return nothing (doesnt have return statement)
-int a(){}	//expected to return int
-float a(){}	// expected to return float
-double a(){}	// expected to return double
-bool a(){}	// expected to return bool
-char a(){}	//expected to return char
-void greet (char name[], int age) {
-        printf(“Heyyyyy %s you are %d“, name, age);
-}
-greet(“Dave“, 25);
-	
+bool isTrue = true; // 1 byte, requires <stdbool.h>, stores 1 (true) or 0 (false)
+```
 
+# Format specifiers
 
+Special tokens that begin with `%` followed by a specifier character and optional flags (width, precision, alignment).
+```c
+printf("Je mi %d\n", 18); // %d or %i expects int
 
+printf("Cena %f\n", 19.548f); // %f expects float
 
-Function prototype
-By prototyping a fuction we can use it and define it later (under the main code)
-void greet (char name[], int age);
-int main(){
-        greet(“Dave“, 18);
-        return 0;
-}
-void greet (char name[], int age) {
-        printf(“Heyyyyy %s you are %d“, name, age);
-}
-	Do-While loop
-int a = 0;
-do{
-        printf(“%d“, a);
-        a++;
-}while(number <= 10);
-	While loop
-int a = 0;
-while(a<=10){
-        printf(“%d“, a);
-        a++;
-}
+printf("Cena %lf\n", 19.54545454545); // %lf expects double (long float)
 
-For loop
-We can use break; and continue; like in python
-for (int i = 0 ; i < 10 ; i++){
-        printf(“%d“,i);
-}
-Pseudo Random
-srand(time(NULL));	//creates a base seed for rand with current time
-rand()
+printf("Znamka %c\n", 'A'); // %c expects single char in single quotes
 
-int max = 100;
-int min = 1;
-int randomNum = (rand() % (max – min + 1 )) + min;	//formula for rand range
+printf("Text: %s\n", "Ahoj"); // %s expects null-terminated string
 
-RAND_MAX	//this is a constant with tahe maximum int rand can return
+printf("Address: %p\n", (void*)&a); // %p expects a pointer address (cast to void* is best practice)
 
+printf("%4d\n", 10); // Prints right-justified within width of 4: "  10"
 
+printf("%-4d\n", 10); // Prints left-justified within width of 4: "10  "
 
-Array
-int number[] = {10,15,20,54,81};
-if we want the len of an element we can use 
+printf("%04d\n", 10); // Pads with leading zeros: "0010"
 
-int len = sizeof(number) / sizeof(number[0]);		//   20/4 = 5
+printf("%+d\n", 10); // Explicitly displays sign: "+10"
 
-int a[5] = {0};	//this declares a array of 5 elements all being int = 0
-2D array
-int number[][2] = {{1,2,3},  {4,5,6}};	
-//you must always declare all sizes (except the first one)
-Array of strings
-char fruits[][10] = {“Apple“, “Banana“, “Coconut“};
-//just line 2D array because strings are already arrays of chars
-Ternary operator
-Shorted if else statements (?)
+printf("%.2f\n", 10.5481); // Restricts to 2 decimal places with rounding: "10.55"
 
+printf("%+7.2f\n", 10.5481); // Explicit sign, right-aligned to 7 characters wide: "  +10.55"
+```
+
+# Operators
+
+| Operator | Name | Description | Example |
+| :--- | :--- | :--- | :--- |
+| `+` | Addition | Adds two operands | `a + b` |
+| `-` | Subtraction | Subtracts right from left operand | `a - b` |
+| `*` | Multiplication | Multiplies two operands | `a * b` |
+| `/` | Division | Divides left by right operand | `a / b` |
+| `%` | Modulus | Remainder of integer division | `a % b` |
+| `++` | Increment | Increases value by 1 (`a++` post, `++a` pre) | `++a`, `a++` |
+| `--` | Decrement | Decreases value by 1 | `--a`, `a--` |
+| `&&` | Logical AND | Returns true if both conditions are true | `a && b` |
+| `\|\|` | Logical OR | Returns true if at least one condition is true | `a \|\| b` |
+| `!` | Logical NOT | Inverts boolean truth value | `!a` |
+| `==` | Equality | Returns true if operands are equal | `a == b` |
+| `!=` | Inequality | Returns true if operands are not equal | `a != b` |
+
+# Integer division caution:
+```c
+int b = 5, c = 2;
+float bad = b / c; // Evaluates to 2.0 because integer division truncates decimals
+float good = (float)b / c; // Evaluates to 2.5 because 'b' was explicitly cast to float
+```
+
+# Variables and Type Casting
+```c
+int a = 0; // Declaration and initialization
+
+int b; // Declaration without initialization: contains garbage memory values!
+
+const int MAX_USERS = 100; // Read-only constant; cannot be modified later
+
+// Implicit Casting (automatic promotion by compiler)
 int x = 5;
-int y = 6;
-int max = (x > y) ? x : y	//if x>y max=x else max=y
-Typedef
-Typedef int Number;	//we change int to Number (definition)
-int main(){
-        Number x = 3;
-        Number y = 4;
-        Number z = x+y;
+double y = x; // 5 converted to 5.0 automatically
+
+// Explicit Type Casting: (type)variable
+int total = 17;
+int count = 5;
+double average = (double)total / count; // 3.4 instead of 3.0
+```
+
+# User Input
+```c
+int age = 0;
+char grade = '\0';
+char name[30];
+
+printf("Enter age: ");
+scanf("%d", &age); // Pass pointer address (&age) so scanf can write directly into memory
+
+printf("Enter grade: ");
+// Leading space before %c skips leftover newline ('\n') from prior input in stdin buffer
+scanf(" %c", &grade);
+
+// Read full line containing spaces
+printf("Enter your name: ");
+getchar(); // Consumes the trailing '\n' left behind by scanf
+fgets(name, sizeof(name), stdin); // Reads up to 29 characters + null terminator safely
+name[strcspn(name, "\n")] = '\0'; // Idiomatic way to strip trailing newline added by fgets
+```
+
+# Strings
+```c
+char name[] = "Dave"; // 4 visible characters + 1 hidden '\0' (null terminator) = 5 bytes
+
+// Modifying the last character to null terminator to truncate the string:
+name[strlen(name) - 1] = '\0'; 
+
+// Common string functions (<string.h>):
+char dest[50];
+strcpy(dest, "Hello "); // Copies second argument into dest
+strcat(dest, "World"); // Appends to destination: "Hello World"
+int len = strlen(dest); // Returns number of characters excluding '\0'
+int cmp = strcmp("apple", "banana"); // Returns <0 if first string is lexicographically smaller
+```
+
+# Math Functions
+Requires `<math.h>`.
+```c
+double sq = sqrt(9); // 3.0
+double p = pow(2, 3); // 8.0 (2 raised to 3rd power)
+double r = round(3.14); // 3.0 (rounds to nearest integer)
+double c = ceil(3.14); // 4.0 (rounds upwards)
+double f = floor(3.14); // 3.0 (rounds downwards)
+int a = abs(-4); // 4 (absolute value from <stdlib.h>)
+double l = log(3); // ~1.0986 (natural logarithm base e)
+double s = sin(1.5708); // Radians input (1.5708 rad = 90 deg -> 1.0)
+double co = cos(0); // 1.0
+double t = tan(0.7853); // ~1.0
+```
+
+# Control Flow
+
+### If / Else
+```c
+int age = 18;
+
+if (age >= 65) {
+    printf("Senior\n");
+} else if (age >= 18) {
+    printf("Adult\n");
+} else {
+    printf("Kid\n");
+}
+```
+
+### Ternary Operator
+Inline conditional shorthand for simple if-else expressions: `condition ? value_if_true : value_if_false`
+```c
+int x = 5, y = 6;
+int max = (x > y) ? x : y; // Evaluates to 6
+```
+
+### Switch Case
+```c
+int day = 1;
+
+switch (day) {
+    case 1:
+        printf("Monday\n");
+        break; // break prevents execution from falling through into case 2
+    case 2:
+        printf("Tuesday\n");
+        break;
+    default:
+        printf("Other day\n");
+        break;
+}
+```
+
+# Loops
+
+### For Loop
+```c
+// (initialization; condition; increment/decrement)
+for (int i = 0; i < 10; i++) {
+    if (i == 3) continue; // Skips iteration 3 and proceeds to i=4
+    if (i == 8) break; // Exits loop entirely
+    printf("%d ", i);
+}
+```
+
+### While Loop
+Condition checked before the loop body runs.
+```c
+int a = 0;
+while (a <= 10) {
+    printf("%d ", a);
+    a++;
+}
+```
+
+### Do-While Loop
+Guaranteed to execute the loop body at least once before checking condition.
+```c
+int a = 0;
+do {
+    printf("%d ", a);
+    a++;
+} while (a <= 10);
+```
+
+# Functions and Prototypes
+
+Function prototypes declare a function's name and signature so the compiler recognizes it when called in `main()` before its actual implementation appears lower in the file.
+```c
+// Prototype: return_type function_name(parameter_types);
+void greet(char name[], int age);
+void addOne(int *num); // Pass-by-reference using pointers
+
+int main(void) {
+    greet("Dave", 18);
+    
+    int val = 10;
+    addOne(&val); // Passes address so the function can alter 'val'
+    // val is now 11
+    
+    return 0;
 }
 
+// Implementation
+void greet(char name[], int age) {
+    printf("Hey %s, you are %d years old.\n", name, age);
+}
 
+void addOne(int *num) {
+    (*num)++; // Dereference pointer to modify value stored at that address
+}
+```
 
-Enums
-enum Day{SUNDAY, MONDAY, TUESDAY};
-	//we can set its values by SUNDAY=6 (default starts values on 0) 
-int main(){
-        Day today = SUNDAY;	
-}                        //we create a variable today with value from Day[SUNDAY] so 0
-Structs
-Just like OOP in Python
+# Arrays
+
+### 1D Arrays
+```c
+int numbers[] = {10, 15, 20, 54, 81};
+
+// Calculate array length at runtime: (total array bytes / single element bytes)
+int len = sizeof(numbers) / sizeof(numbers[0]); // 20 / 4 = 5 elements
+
+// Zero-initialization for all elements:
+int empty[5] = {0}; // [0, 0, 0, 0, 0]
+```
+
+### 2D Arrays
+Inner dimensions must always be specified; the first dimension can be inferred.
+```c
+// 3 rows, 2 columns
+int matrix[][2] = {
+    {1, 2},
+    {3, 4},
+    {5, 6}
+};
+
+int val = matrix[1][0]; // Accesses second row, first column (value: 3)
+```
+
+### Array of Strings
+```c
+// 3 strings, each allocated space for up to 9 characters + '\0'
+char fruits[][10] = {"Apple", "Banana", "Coconut"};
+
+printf("%s\n", fruits[1]); // "Banana"
+```
+
+# Pseudo-Random Numbers
+Requires `<stdlib.h>` and `<time.h>`.
+```c
+// Seed generator once using current Unix epoch timestamp
+srand((unsigned int)time(NULL));
+
+int min = 1;
+int max = 100;
+
+// Formula to generate a number within [min, max] range:
+int randomNum = (rand() % (max - min + 1)) + min;
+
+// RAND_MAX is a library constant containing the maximum integer rand() can output
+```
+
+# Typedef and Enums
+
+### Typedef
+Defines an alias for an existing type to improve readability.
+```c
+typedef unsigned long ulong;
+typedef char String50[50];
+
+ulong bigNum = 4294967295;
+String50 user = "Alice";
+```
+
+### Enums
+Maps descriptive names to integral constants (starts at index 0 by default).
+```c
+enum Day { SUNDAY, MONDAY, TUESDAY, WEDNESDAY };
+// SUNDAY=0, MONDAY=1, TUESDAY=2, WEDNESDAY=3
+
+enum Status { PENDING = 1, SUCCESS = 200, ERROR = 500 };
+
+int main(void) {
+    enum Day today = SUNDAY; // today holds integer value 0
+    if (today == SUNDAY) {
+        printf("Weekend!\n");
+    }
+    return 0;
+}
+```
+
+# Structs
+
+Used to bundle variables of different types together into a single custom type.
+```c
 struct Student {
-        char name[50];
-        int age;
-        float gpa;
-        bool isFullTime;
+    char name[50];
+    int age;
+    float gpa;
+    bool isFullTime;
 };
-int main(){
-        struct Student student1 = {“Dave“, 18, 2.5, true};
-        printf(“%s“, student1.name);
-        strcpy(student1.name, “Tom“);	                    //we change the name to Tom
-}
-Array of Structs
+
+// Array of Structs
 struct Car {
-        char model[50];
-        int year;
-        int price;
+    char model[50];
+    int year;
+    int price;
 };
 
-int main(){
-        struct Car cars[] = {
-        {“Mustang“, 2025, 32000};
-        {“Corvette“, 2026, 68000};
-        {“Challenger“, 2024, 29000};
-        };
-        printf(“%s %d $%d“, car[0].model, car[0].year, car[0].price);
+int main(void) {
+    struct Student student1 = {"Dave", 18, 2.5f, true};
+    strcpy(student1.name, "Tom"); // Update string member via strcpy
+
+    struct Car fleet[] = {
+        {"Mustang", 2025, 32000},
+        {"Corvette", 2026, 68000},
+        {"Challenger", 2024, 29000}
+    };
+
+    // Arrow operator (->) is used when accessing struct fields through a pointer:
+    struct Student *pStudent = &student1;
+    printf("%s\n", pStudent->name); // Equivalent to (*pStudent).name
+
+    return 0;
 }
+```
 
+# Pointers
 
-
-Pointers
-Stores address of another variable
+Pointers hold memory addresses of other variables instead of direct values.
+```c
 int age = 25;
-int *pAge = &age;	//creates a pointer (type of reference variable)
-(*pAge)++;	                       //we turn the pointer back into a variable (on the pointer address)
-                                                 and increase its value by one
 
+// Declaration: '*' denotes pAge is a pointer to an int
+int *pAge = &age; // '&' gets address of 'age'
 
+// Dereferencing: '*' accesses/updates the value stored at that target address
+(*pAge)++; // Increments 'age' to 26
 
+printf("Value: %d\n", *pAge); // Prints 26
+printf("Memory Address: %p\n", (void*)pAge); // Prints hex address (e.g., 0x7ffd...)
+```
 
+# Dynamic Memory Allocation (Heap)
+Memory allocated via `malloc`, `calloc`, or `realloc` persists until explicitly freed with `free()`. Always check if allocation returned `NULL`.
 
+### Malloc
+Allocates uninitialized raw memory of specified size in bytes.
+```c
+int n = 5;
+char *grades = (char*)malloc(n * sizeof(char)); // 5 * 1 = 5 bytes
 
-
-
-
-
-
-
-
-
-
-
-
-File management
-Create a file and write
-char text[] = “Ahoj jak \nJe“; 
-
-FILE *pFile = fopen(“output.txt“, “w“);
-if(pFile == NULL){
-        printf(“Error opening file“);
-        return 1;
+if (grades == NULL) {
+    fprintf(stderr, "Allocation failed!\n");
+    return 1;
 }
 
-fprintf(pFile, “%s“, text);
+free(grades);   // Releases allocated memory back to OS heap
+grades = NULL;  // Prevent dangling pointer bug (avoids pointing to deallocated memory)
+```
 
-fclose(pFile);
+### Calloc
+Allocates memory and clears all bytes to zero (`number_of_items`, `size_per_item`).
+```c
+int count = 4;
+int *scores = (int*)calloc(count, sizeof(int)); // Cleared to zeros
 
-Open a file and read 
-char buffer[1024] = {0};
-FILE *pFile = fopen(“output.txt“, “r“);
-if(pFile == NULL){
-        printf(“Error opening file“);
-        return 1;
-}
+if (scores == NULL) return 1;
 
-while(fgets(buffer, sizeof(buffer), pFile) != NULL){
-        printf(“%s“, buffer);
-}
-
-fclose(pFile);
-MALLOC()
-int number = 5;
-char *grades = malloc( number*sizeof(char) );     //we allocate a pointer grades with the
-                                                                                                       size calculated from number (in bytes)
-free(grades);	//return rented space from heap
-grades = NULL;	                           //avoids dangling pointers (so we dont use it accidentally)
- 
-
-
-
-CALLOC()
-int number = 4;
-int *scores = calloc(number, sizeof(int));	      //like malloc but sets all values to 0
 free(scores);
 scores = NULL;
-	REALLOC()
-Reallocate (extend) pointer to array
-int number = 5;
-float *prices = calloc( number, sizeof(float) );
-int new_number = 7;
-float *temp = realloc( prices,  (new_number*sizeof(float))  );
-prices = temp;
-temp = NULL;
+```
+
+### Realloc
+Resizes previously allocated heap block.
+```c
+int initial = 5;
+float *prices = (float*)calloc(initial, sizeof(float));
+
+int expanded = 7;
+// Always use a temporary pointer so you don't leak memory if realloc returns NULL
+float *temp = (float*)realloc(prices, expanded * sizeof(float));
+
+if (temp != NULL) {
+    prices = temp; // Reassignment safe
+} else {
+    // Original 'prices' block remains intact if reallocation failed
+    free(prices);
+    return 1;
+}
+
 free(prices);
 prices = NULL;
+```
 
+# File Management
 
+### Writing to a File
+```c
+char text[] = "Ahoj jak\nJe";
+
+// "w" mode creates or overwrites an existing file; "a" appends without overwriting
+FILE *pFile = fopen("output.txt", "w");
+if (pFile == NULL) {
+    perror("Error opening file"); // Prints standard system error details
+    return 1;
+}
+
+fprintf(pFile, "%s", text);
+fclose(pFile); // Flushes buffer and closes file descriptor
+```
+
+### Reading from a File
+```c
+char buffer[1024] = {0};
+
+FILE *pFile = fopen("output.txt", "r");
+if (pFile == NULL) {
+    perror("Error opening file");
+    return 1;
+}
+
+// fgets reads file line-by-line until end of file (EOF returns NULL)
+while (fgets(buffer, sizeof(buffer), pFile) != NULL) {
+    printf("%s", buffer);
+}
+
+fclose(pFile); // Always close open file handles
+```

@@ -76,10 +76,10 @@ Supported languages: `python`, `js`, `bash`, `html`, `css`, `java`, `c`,
 
 ## Tables
 
-  Command   Description
-  --------- -------------
-  ls        list files
-  cd        change dir
+  Command | Description
+  --------- | -------------
+  ls      |  list files
+  cd      |  change dir
 
 ------------------------------------------------------------------------
 

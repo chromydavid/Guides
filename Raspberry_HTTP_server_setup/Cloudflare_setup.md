@@ -43,7 +43,7 @@ This creates a tunnel ID and credentials file.
 Note the tunnel name and ID; you’ll need them for the config.
 
 ## Step 5: Configure the tunnel 
-
+## IF YOU HAVE REMOTELY MANAGED TUNNEL THEN THIS CONFIG.YAML WILL NOT WORK YOU HAVE TO ADD URL IN CLOUDFLARED WEB INTERFACE UNDER Networking>tunnels>my_tunnel>add_route
 1. Create a config file
 
 `nano /home/pi/.cloudflared/config.yml`
@@ -98,7 +98,7 @@ ingress:
   - service: http_status:404
 ```
 
-## Step 6: host your html app (When server restarts you need to repeat this step and step 8.)
+## Step 6: host your html app (When server restarts you need to repeat everything from this step)
 
 1. Go to the directory where your index.html is stored
 
@@ -138,3 +138,21 @@ Now your domain `your_url.com` is linked to your Raspberry Pi tunnel.
 `https://your_url.com`
 
 Thats it !!
+
+## Useful commands
+
+1. Show all running services:
+
+`sudo ss -tulpn` 
+
+2. Show all running services that are only LISTENING (HTTP websites):
+   
+`sudo ss -tulpn | grep LISTEN`
+
+3. Close specific service (copy PID of service shown by command above):
+
+`sudo kill <PID>` 
+
+4. Hard shutdown "kill" specific service:
+
+`sudo kill -9 <PID>`

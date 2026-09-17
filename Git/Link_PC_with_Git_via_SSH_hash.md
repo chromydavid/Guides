@@ -25,7 +25,7 @@
 
 
 
-## FOR WINDOWS POWERSHELL (i recomend using HTTP access to Git)
+## FOR WINDOWS POWERSHELL (i recomend using HTTP access to personal Git)
 1. Check if you already have SSH keys
 `ls -Path $HOME\.ssh`
 

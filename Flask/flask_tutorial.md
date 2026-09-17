@@ -1,9 +1,14 @@
 # FLASK Basics
 
 ## Creating virtual eviroment (venv)
-- Create venv directory: `python -m venv env`
+- Create venv directory: `python -m venv venv`
 
-- Move to venv: `source env/bin/activate`
+- Move to venv (Shell will show (venv) at the start if succesful):
+    - Linux: `source env/bin/activate`
+    - Windows (CMD): `venv\Scripts\activate.bat`
+    - Windows (Powershell): 
+        - Run: `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser`    
+        - Then: `venv\Scripts\Activate.ps1`
 
 - Exit venv: `deactivate`
 
@@ -11,8 +16,10 @@
     - Flask: (main Framework)
     - SQLAlchemy: Simplifies comunication to DBs (App to DB middleman)
 
-- Create requirements.txt (inside venv): `pip freeze > requirements.txt`
-    - Writes all pip libs inside venv into the requirements.txt file
+- Create requirements.txt: `pip freeze > requirements.txt`
+    - Writes all pip libs inside requirements.txt file for future lib install
+      
+- If requirements.txt exists, pull libs from it: `pip install -r requirements.txt`
 
 ## Simple project structure
     ``` yaml
